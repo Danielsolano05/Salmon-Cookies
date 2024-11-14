@@ -59,15 +59,15 @@ estimate: function () {
 const hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm','7pm'];
 const stores = [seattle, tokyo, dubai, paris, lima];
 function random (min, max) {
-  return Math.floor(math.random() * (max-min + 1))+min;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function estimateSales (store) {
   const sales =[];
   for (let i =0; i< hours.length; i++){
-    const numCustomers = randome(store.minCustomersPerHour, maxCustomersPerHour);
-    const hoursSales = match.ceil(numCustomers * store.avgCookiesPerSale); //fix here 
-    sales.push(hourSales);
+    const numCustomers = random(store.minCustomersPerHour, maxCustomersPerHour);
+    const hoursSales = math.ceil(numCustomers * store.avgCookiesPerSale); //fix here 
+    sales.push(hoursSales); // misspelled hoursSales hourSales
   }
   return sales;
 }
@@ -76,10 +76,10 @@ function render(store) {
  
   let total = 0; //fix here
  
-  const root = document.getElementsById('root');
+  const root = document.getElementById('root');
 }
 
-const location = document.getElement('Section')
+const locationSection = document.getElement('Section')
 location.classList.add('location')
 root.appendChild(location);
 
@@ -100,7 +100,7 @@ for (let i = 0; i < hours.length; i++) {  //fix needed here
   list.appendChild(listItems);
 
 
-  const totalItems = document.createDocumentFragment('li');
+  const totalItems = document.createElement('li');
   totalItems.textContent = 'total:' + total + 'cookies';
   list.appendChild(totalItems)
 }
@@ -112,7 +112,7 @@ for (let i = 0; i < hours.length; i++) {  //fix needed here
 
 
 function runApplication() {
-  for (let i = 0; i;<stores.length; i++){ // fix this here
+  for (let i = 0; i<stores.length; i++){ // fix this here
     stores[i].estimate();
     render(stores[i]);
   }

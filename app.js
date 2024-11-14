@@ -108,3 +108,11 @@ for (let i = 0; i < hours.length; i++) {
   totalItems.textContent = 'total:' + total + 'cookies';
   list.appendChild(totalItems)
 }
+
+
+function runApplication() {
+  for (let i = 0; i;<stores.length; i++){
+    stores[i].estimate();
+    render(stores[i]);
+  }
+}

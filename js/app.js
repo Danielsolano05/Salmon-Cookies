@@ -44,6 +44,7 @@ cookiesEachHour: [],
 estimate: function () {
   this.cookiesEachHour = estimateSales(this);
 }
+
 };
 const lima = {
 locationName:'lima',
@@ -65,8 +66,8 @@ function random (min, max) {
 function estimateSales (store) {
   const sales =[];
   for (let i =0; i< hours.length; i++){
-    const numCustomers = random(store.minCustomersPerHour, maxCustomersPerHour);
-    const hoursSales = math.ceil(numCustomers * store.avgCookiesPerSale); //fix here 
+    const numCustomers = random(store.minCustomersPerHour, store.maxCustomersPerHour);
+    const hoursSales = Math.ceil(numCustomers * store.avgCookiesPerSale); //fix here 
     sales.push(hoursSales); // misspelled hoursSales hourSales
   }
   return sales;
@@ -77,42 +78,33 @@ function render(store) {
   let total = 0; //fix here
  
   const root = document.getElementById('root');
-}
 
-const locationSection = document.getElement('Section')
-location.classList.add('location')
-root.appendChild(location);
+
+const storeSection = document.createElement('Section');
+root.appendChild(storeSection);
 
 const title = document.createElement('h2');
-title.textContent =store.locationName;
-location.appendChild(title);
+title.textContent =store.locationName; //stores?
+storeSection.appendChild(title);
 
 
 const list = document.createElement('ul');
-location.appendChild (list);
-
-
+storeSection.appendChild (list);
 
 for (let i = 0; i < hours.length; i++) {  //fix needed here
   total += store.cookiesEachHour[i];
   const listItems = document.createElement('li');
   listItems.textContent =hours[i] + ':' + store.cookiesEachHour[i] + 'cookies';
   list.appendChild(listItems);
-
+}
 
   const totalItems = document.createElement('li');
   totalItems.textContent = 'total:' + total + 'cookies';
   list.appendChild(totalItems)
 }
 
-
-
-
-
-
-
 function runApplication() {
-  for (let i = 0; i<stores.length; i++){ // fix this here
+  for (let i = 0; i < stores.length; i++){ 
     stores[i].estimate();
     render(stores[i]);
   }

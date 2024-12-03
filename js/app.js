@@ -207,3 +207,9 @@ tableElement.appendChild(tableRow);
 // }
 
 // runApplication();
+const salmonForm = document.getElementById('salmonForm');
+
+salmonsForm.addEventListener('submit', formHandler)
+{
+  
+}

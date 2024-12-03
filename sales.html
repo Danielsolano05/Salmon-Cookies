@@ -24,8 +24,21 @@
 
 <main>
   <section id="root"></section>
+  <form id="salmonsForm">
+    <fieldset>
+      <legend>add a new store to the table</legend> 
+      <label>location name</label>
+      <input name="location name"type="text" />
+      <label>Minimum Customers Per Hour</label>
+      <input name="Minimum Customers per Hour" type="number" />
+      <label>Maximum Customers Per Hour</label>
+      <input name="Maximum Customers per Hour" type="number" />
+      <label>Average Cookies Per Sale</label>
+      <input name="Average Cookies Per Sale" type="number" />
+    </fieldset>
+    <button type="submit">Submit</button>
+  </form>      
 </main>
-
 
 <table id="sales-table"></table>
 <script src="js/app.js"></script>

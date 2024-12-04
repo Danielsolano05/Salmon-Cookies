@@ -207,9 +207,28 @@ tableElement.appendChild(tableRow);
 // }
 
 // runApplication();
-const salmonForm = document.getElementById('salmonForm');
 
-salmonsForm.addEventListener('submit', formHandler)
-{
-  
+// Add the event listener with the defined formHandler function
+function handleForm(e) {
+  e.preventDefault();
+   console.log('event object', e);
+   const min = parseInt(e.target.min.value);
+   const max = parseInt(e.target.max.value);
+   const avg = parseFloat(e.target.avg.value);  const loc = e. target.location.value;
+   const newStore = new CookieStand(loc, min, max, avg);
+   state.allCookieStands.push(newStore);
+   e.target.location.value = null;
+   e.target.min.value = null;
+   e.target.max.value = null;
+   e.target.avg.value = null;
+
+   tableFooter.innerHTML = '';
+   makeFooterRowFooterRow();
 }
+
+   makeHeadRow();
+
+   makeFooterRow();
+
+   formElement.addEventListener('submit', handleForm);
+   const formElement = document.getElementById('salmonsForm');

@@ -2,12 +2,14 @@
 
 const hours = ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm'];
 const tableElement = document.getElementById('sales-table');
+const formElement = document.getElementById('salmonsForm');
+formElement.addEventListener('submit', handleForm);
 //Store constructor function
 const state = {
   allCookiesStand:[],
 };
  
-function cookiesStand(locationName, minCustomersPerHour, maxCustomersPerHour, avgCookiesPerSale) {
+function CookiesStand(locationName, minCustomersPerHour, maxCustomersPerHour, avgCookiesPerSale) {
   this.locationName = locationName;
   this.minCustomersPerHour = minCustomersPerHour;
   this.maxCustomersPerHour = maxCustomersPerHour;
@@ -78,12 +80,12 @@ function cookiesStand(locationName, minCustomersPerHour, maxCustomersPerHour, av
 // function random (min, max) {
 //   return Math.floor(Math.random() * (max - min + 1)) + min;
 // }
-cookiesStand.prototype.calcCustemersEachHour = function (){
+CookiesStand.prototype.calcCustemersEachHour = function (){
   for (let i=0; i< hours.length; i++){
     this.customersEachHour.push(random( this.minCustomersPerHour, this.maxCustomersPerHour));
   }
 };
-cookiesStand.prototype.calcCookiesEachHour = function (){
+CookiesStand.prototype.calcCookiesEachHour = function (){
   this.calcCustemersEachHour();
   for (let i=0; i< hours.length; i++){
     const oneHour = Math.ceil(this.customersEachHour[i] * this.avgCookiesPerSale);
@@ -100,7 +102,7 @@ cookiesStand.prototype.calcCookiesEachHour = function (){
 //   }
 //   return sales;
 // }
-cookiesStand.prototype.render = function (){
+CookiesStand.prototype.render = function (){
 this.calcCookiesEachHour();
 const tableRow = document.createElement('tr');
 let tableDataElement = document.createElement('td');
@@ -118,11 +120,11 @@ tableElement.appendChild(tableRow);
 };
 
 
-let seattle = new cookiesStand('seattle', 12, 25, 8.5);
-let tokyo = new cookiesStand('tokyo', 15, 30, 6.8);
-let dubai = new cookiesStand('dubai', 20, 38, 9.5);
-let paris = new cookiesStand('paris', 35, 48, 8.8);
-let lima = new cookiesStand('lima', 10, 22, 9.2);
+let seattle = new CookiesStand('seattle', 12, 25, 8.5);
+let tokyo = new CookiesStand('tokyo', 15, 30, 6.8);
+let dubai = new CookiesStand('dubai', 20, 38, 9.5);
+let paris = new CookiesStand('paris', 35, 48, 8.8);
+let lima = new CookiesStand('lima', 10, 22, 9.2);
 state.allCookiesStand.push(seattle,tokyo,dubai,paris,lima);
 function random(min, max){
   return Math.floor(Math.random() * (max-min + 1)) + min;
@@ -210,25 +212,42 @@ tableElement.appendChild(tableRow);
 
 // Add the event listener with the defined formHandler function
 function handleForm(e) {
-  e.preventDefault();
+  e.preventDefault(); // here work is needed to function
    console.log('event object', e);
+   const loc = e. target.loc.value;
    const min = parseInt(e.target.min.value);
    const max = parseInt(e.target.max.value);
-   const avg = parseFloat(e.target.avg.value);  const loc = e. target.location.value;
-   const newStore = new CookieStand(loc, min, max, avg);
-   state.allCookieStands.push(newStore);
-   e.target.location.value = null;
+   const avg = parseFloat(e.target.avg.value); 
+   const newStore = new CookiesStand(loc, min, max, avg);
+   state.allCookiesStand.push(newStore);
+   e.target.loc.value = null;
    e.target.min.value = null;
    e.target.max.value = null;
    e.target.avg.value = null;
 
-   tableFooter.innerHTML = '';
-   makeFooterRowFooterRow();
+   tableElement.deleteTFoot(); // Removes the footer if it exists
+   makeFooterRow();
+   tableElement.innerHTML = ''; // Clear existing table
+  //handleForm(); //work also needed here
+   // tableFooter.innerHTML = '';
+   //makeFooterRowFooterRow();
 }
 
    makeHeadRow();
 
    makeFooterRow();
 
-   formElement.addEventListener('submit', handleForm);
-   const formElement = document.getElementById('salmonsForm');
+   //formElement.addEventListener('submit', handleForm);
+   //const formElement = document.getElementById('salmonsForm'); 2024
+   //const newStore = new CookieStand(loc, min, max, avg);
+
+   document.addEventListener('DOMContentLoaded', () => {
+    const formElement = document.getElementById('salmonsForm');
+    formElement.addEventListener('submit', handleForm);
+  });
+  
+  function handleForm(e) {
+    e.preventDefault();
+    console.log("Form submitted!");
+    // Your form handling logic here
+}
